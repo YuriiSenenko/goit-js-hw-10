@@ -56,12 +56,16 @@ function listCountriesMarkup(countries) {
 function countryInfo(countries) {
   const listElementMarkup = countries
     .map(
-      country =>
-        `<div class="block"><img class="flag" src=${country.flags.svg} alt="flag" width="60">
-        <h2 class="country-info__name">${country.name}</h2></div>
-         <p class="country-info__description">Capital: <span class="country-info__value">${country.capital}</span></p>
-         <p class="country-info__description">Population: <span class="country-info__value">${country.population}</span></p>
-         <p class="country-info__description">Languages: <span class="country-info__value">${country.languages}</span></p>`
+      ({ name, capital, population, flags, languages }) =>
+        `<div class="block"><img class="flag" src=${
+          flags.svg
+        } alt="flag" width="60">
+        <h2 class="country-info__name">${name}</h2></div>
+         <p class="country-info__description">Capital: <span class="country-info__value">${capital}</span></p>
+         <p class="country-info__description">Population: <span class="country-info__value">${population}</span></p>
+         <p class="country-info__description">Languages: <span class="country-info__value">${languages.map(
+           el => el.name
+         )}</span></p>`
     )
     .join('');
   refs.countryInfo.insertAdjacentHTML('beforeend', listElementMarkup);
